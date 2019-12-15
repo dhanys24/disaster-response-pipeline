@@ -49,7 +49,9 @@ Below is screenshot of the disaster aplication of overview datasets:
 ![alt text](https://github.com/dhanys24/disaster-response-pipeline/blob/master/app/overview_dataset.png)
 
 
-And here is the application that need machine learning to specify category of the received messages:
+And here is the application that need machine learning to specify category of the received messages.
+In the screenshot below, the example of the messages is "Please, we need tents and water. We are in Silo, Thank you!".
+And the category detected are Related, Request, Aid related, Water, and Shelter.
 ![alt text](https://github.com/dhanys24/disaster-response-pipeline/blob/master/app/messages_categories_result.png)
 
 
