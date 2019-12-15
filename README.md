@@ -45,6 +45,13 @@ There are three main folders:
 2. A machine learning pipepline was developed to train a classifier to performs multi-output classification on the 36 categories in the dataset.
 3. A Flask app was created to show data visualization and classify the message that user enters on the web page.
 
+Below is screenshot of the disaster aplication of overview datasets:
+![alt text](https://github.com/dhanys24/disaster-response-pipeline/blob/master/app/overview_dataset.png)
+
+
+And here is the application that need machine learning to specify category of the received messages:
+![alt text](https://github.com/dhanys24/disaster-response-pipeline/blob/master/app/messages_categories_result.png)
+
 
 ## Licensing, Authors, Acknowledgements<a name="licensing"></a>
 
