@@ -1,18 +1,74 @@
 import sys
-
+import pandas as pd
+from sqlalchemy import create_engine
 
 def load_data(messages_filepath, categories_filepath):
-    pass
+    '''
+    INPUT:
+        messages_filepath -  File path of messages data
+        categories_filepath -  File path of categories data
+    OUTPUT:
+        df - Merged dataset from messages and categories
+    '''
+    
+    # READ messages dataset
+    messages = pd.read_csv(messages_filepath)
+    # READ categories dataset
+    categories = pd.read_csv(categories_filepath)
+    # MERGE the messages and categories datasets using the common id
+    df = pd.merge(messages,categories, left_on ='id', right_on='id', how='left')
+    return df
 
 
 def clean_data(df):
-    pass
+    '''
+    INPUT:
+        df - Merged dataset from messages and categories
+    OUTPUT:
+        df - Cleaned dataset
+    '''
+    # CREATE dataframe of the 36 individual category columns
+    categories = df['categories'].str.split(';',expand=True)
+    
+    # SELECT the first row of the categories dataframe
+    row = categories.iloc[0]
+    
+    # USE this row to extract a list of new column names for categories
+    category_colnames = row.apply(lambda x: x[:-2])
+    
+    # RENAME categories columns
+    categories.columns = category_colnames
+    
+    # CONVERT category values to just numbers 0 or 1
+    for column in categories:
+    # SET each value to be the last character of the string
+        categories[column] = (categories[column].str.split('-')).str[-1]
+
+        # CONVERT column from string to numeric
+        categories[column] = categories[column].astype(int)
+        
+    # DROP the original categories column    
+    df.drop(columns='categories', inplace=True)
+    # CONCAT the original dataframe with the new categories dataframe
+    df = pd.concat([df,categories], axis=1)
+    df.drop_duplicates(inplace=True)
+    return df
 
 
-def save_data(df, database_filename):
-    pass  
-
-
+def save_data(df, database_filepath):
+    '''
+    Save df into sqlite db
+    INPUT:
+        df - cleaned dataset
+        database_filename: database name, e.g. DisasterMessages.db
+    OUTPUT: 
+        A SQLite database
+    '''
+    
+    engine = create_engine('sqlite:///{}'.format(database_filepath))
+    df.to_sql('DisasterMessages', engine, index=False)
+      
+        
 def main():
     if len(sys.argv) == 4:
 
