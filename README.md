@@ -15,12 +15,13 @@ To run his project, the following packages need to be installed for nltk:
 * punkt
 * wordnet
 * stopwords
+
 Also make sure that you have already installed package sklearn and sqlalchemy.
 If it is not installed yet, you can simply run 'pip install sklearn' and 'pip install sqlalchemy' in your terminal 
 
 ## Project Motivation<a name="motivation"></a>
 
-This project is intended to make a classification of messages that people sent during disaster. By sorting the messages received by into specific category it will speed up the response process, it can be aid relates, wheater info, or rescue.
+This project is intended to make a classification of messages that people sent during disaster. By sorting the messages received into specific category it will speed up the response process, it can be aid related, wheater info, or rescue.
 To complete this project I applied data engineering, natural language processing, and machine learning skills.
 
 ## File Descriptions <a name="files"></a>
